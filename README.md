@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Learning more with REACT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Learning from the beginning, how to use conditions inside of JSX like
 
-## Available Scripts
+```javascript
+{BOOLEAN && (COMPONENTS OR ANY JSX) }
+```
 
-In the project directory, you can run:
+If the boolean or the condition im using there is true it will show me what is after the **&&**
 
-### `npm start`
+Using map as a filter in JSX
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```javascript
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+{VariableNAme.map( () => (COMPONENTS OR ANY JSX))}
+```
 
-### `npm test`
+Inline functions inside of JSX to be call just when i click
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```javascript
+onClick={() => e.target.value}
+```
 
-### `npm run build`
+## Custom Hooks
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+useFetch for fetching data from any url
+This function is going to work with any URL because that is the prop that it set up to work with
+Setting the useState to null from the beginning give me the option to add anything i need for it
+The the use Effect is going to be call, then the function FetchData is called with async function where the value of url will be fetch and then the result translate to a json format and set the value to the setData property and call the function fetchData again and return just data as a value of this function
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```jsx
+export const useFetch = (url) => {
+ const [data, setData] = useState(null);
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ useEffect(() => {
+  const fetchData = async () => {
+   const res = await fetch(url);
 
-### `npm run eject`
+   const json = await res.json();
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   setData(json);
+  };
+  fetchData();
+ }, [url]);
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ return { data };
+};
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```javascript
+    const [showTrips, setShowTrips] = useState(true);
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  <Button
+variant={showTrips ? 'contained' : 'outlined'}
+onClick={() => setShowTrips(false)}
+>
+Hide Trip
+</Button>
+{showTrips && <TripList />} */
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+````
